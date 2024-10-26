@@ -1,1 +1,1 @@
-export { default as ConformationDialog } from './ConformationDialog'
+export { default as ConformationDialog } from "./ConformationDialog";

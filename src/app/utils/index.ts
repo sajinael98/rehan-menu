@@ -1,3 +1,3 @@
 export function formatCurrency(price: number) {
-    return `${price} ₪`
+  return `${price} ₪`;
 }
