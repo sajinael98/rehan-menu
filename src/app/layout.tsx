@@ -1,12 +1,17 @@
 "use client";
 
-import { MantineProvider, MantineThemeOverride } from "@mantine/core";
+import {
+  MantineProvider,
+  MantineThemeOverride,
+  MediaQuery,
+} from "@mantine/core";
 import { Tajawal } from "next/font/google";
 import "./globals.css";
 import { CartProvider } from "react-use-cart";
-import { useDisclosure } from "@mantine/hooks";
+import { useDisclosure, useMediaQuery } from "@mantine/hooks";
 import { useEffect } from "react";
 import Welcome from "./(menu)/components/Welcome";
+import { useIsMobile } from "./hooks/use-is-mobile";
 
 const inter = Tajawal({ subsets: ["latin"], weight: "400" });
 
@@ -33,14 +38,20 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const [isWelcomeShowen, { close: hideWelcome }] = useDisclosure(true);
+  const [isWelcomeShowen, { close: hideWelcome, open: showWelcome }] =
+    useDisclosure(true);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      hideWelcome();
-    }, 5000);
-    return () => clearTimeout(timeout);
-  }, []);
+    if (isMobile) {
+      const timeout = setTimeout(() => {
+        hideWelcome();
+      }, 2250);
+      return () => clearTimeout(timeout);
+    } else {
+      showWelcome();
+    }
+  }, [isMobile]);
 
   return (
     <html lang="en">

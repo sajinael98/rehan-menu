@@ -1,7 +1,7 @@
 "use client";
 
-import { AppShell } from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
+import { AppShell, MediaQuery } from "@mantine/core";
+import { useDisclosure, useMediaQuery } from "@mantine/hooks";
 import { PropsWithChildren } from "react";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
@@ -24,7 +24,9 @@ export default function Layout({ children }: PropsWithChildren) {
         },
       }}
     >
-      {children}
+      <MediaQuery largerThan="sm" styles={{ display: "none" }}>
+        {children}
+      </MediaQuery>
     </AppShell>
   );
 }

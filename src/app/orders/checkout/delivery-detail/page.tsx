@@ -19,7 +19,7 @@ import { Suspense } from "react";
 
 const DeliveryDetailPage = () => {
   const [opened, { open, close }] = useDisclosure(false);
-  const { values, getInputProps } = useForm({
+  const { values, getInputProps, setFieldValue } = useForm({
     initialValues: {
       name: "",
       paymentType: "cash",
@@ -69,6 +69,7 @@ const DeliveryDetailPage = () => {
           gap="md"
           align="center"
           justify={"space-between"}
+          onClick={()=> setFieldValue("paymentType", "credit card")}
           bg={values.paymentType == "credit card" ? "#1B3F01" : "#F1EECC"}
           sx={(theme) => ({
             height: 58,
@@ -111,6 +112,7 @@ const DeliveryDetailPage = () => {
           gap="md"
           align="center"
           justify={"space-between"}
+          onClick={()=> setFieldValue("paymentType", "cash")}
           bg={values.paymentType == "cash" ? "#1B3F01" : "#F1EECC"}
           sx={(theme) => ({
             height: 58,

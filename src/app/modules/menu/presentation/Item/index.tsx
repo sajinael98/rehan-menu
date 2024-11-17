@@ -152,6 +152,7 @@ export default function Item({ item }: ItemProps) {
         <Checkbox.Group
           orientation="horizontal"
           sx={{ ".mantine-Group-root": { justifyContent: "flex-end" } }}
+          labelProps={{display:"none"}}
           {...getInputProps("modifiers")}
         >
           {item.modifiers.map((modifier) => (
@@ -189,6 +190,16 @@ export default function Item({ item }: ItemProps) {
               size="xs"
               spacing="xs"
               pb={5}
+              label="الحجم"
+              pos="relative"
+              styles={{
+                label: {
+                  position: "absolute",
+                  top: -10,
+                  right: 0,
+                  fontWeight: 300
+                }
+              }}
             >
               {item.sizes.map((size) => (
                 <Radio
@@ -206,9 +217,10 @@ export default function Item({ item }: ItemProps) {
             </Radio.Group>
           </Stack>
           <Textarea
+
             {...getInputProps("description")}
             sx={{ flex: 2 }}
-            label="ملاحظات"
+            placeholder="ملاحظات أضافية على الطلب"
             styles={(theme) => ({
               label: {
                 display: "none",
@@ -219,6 +231,12 @@ export default function Item({ item }: ItemProps) {
                 borderTop: "none",
                 borderColor: theme.colors.green,
                 borderRadius: theme.spacing.xs,
+                textAlign:"right",
+                // fontSize: 16
+                "::placeholder": {
+                  textAlign:"right",
+                  fontSize: 12
+                }
               },
             })}
           />

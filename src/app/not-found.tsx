@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, Button, Flex, Text, ThemeIcon } from "@mantine/core";
+import { Box, Button, Flex, ThemeIcon } from "@mantine/core";
 import { IconX } from "@tabler/icons-react";
 import { useRouter } from "next/navigation";
 

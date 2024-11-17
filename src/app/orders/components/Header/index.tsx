@@ -10,7 +10,7 @@ const Header = () => {
         <Button
           variant="subtle"
           leftIcon={<IconArrowLeft />}
-          onClick={() => router.push("/menu")}
+          onClick={() => router.push("/")}
         >
           الرجوع
         </Button>
