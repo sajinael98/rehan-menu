@@ -26,7 +26,7 @@ const CartItemsList = ({ items }: CartItemsListProps) => {
   if (!items.length) {
     return (
       <Flex
-        sx={(theme) => ({
+        sx={() => ({
           background: "none",
           width: "100%",
           position: "absolute",

@@ -17,8 +17,7 @@ import { useCounter } from "@mantine/hooks";
 import {
   IconMinus,
   IconPlus,
-  IconRepeat,
-  IconStarFilled,
+  IconStarFilled
 } from "@tabler/icons-react";
 import { useAnimate } from "framer-motion/mini";
 import Image from "next/image";
