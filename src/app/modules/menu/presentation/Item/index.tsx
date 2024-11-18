@@ -10,11 +10,16 @@ import {
   Stack,
   Text,
   Textarea,
-  ThemeIcon
+  ThemeIcon,
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { useCounter } from "@mantine/hooks";
-import { IconMinus, IconPlus, IconStarFilled } from "@tabler/icons-react";
+import {
+  IconMinus,
+  IconPlus,
+  IconRepeat,
+  IconStarFilled,
+} from "@tabler/icons-react";
 import { useAnimate } from "framer-motion/mini";
 import Image from "next/image";
 import { useCart } from "react-use-cart";
@@ -52,12 +57,12 @@ export default function Item({ item }: ItemProps) {
 
   async function showOptions() {
     animate(".item-summary", { position: "absolute", zIndex: 0, opacity: 0 });
-    animate(".item-options", { opacity: 1, zIndex: 1 }, { duration: .5 });
+    animate(".item-options", { opacity: 1, zIndex: 1 }, { duration: 0.5 });
     animate(".item-options", { position: "static" });
   }
   async function hideOptions() {
     animate(".item-options", { position: "absolute", zIndex: -1, opacity: 0 });
-    animate(".item-summary", { opacity: 1, zIndex: 1 });
+    animate(".item-summary", { opacity: 1, zIndex: 1 }, { duration: 0.5 });
     animate(".item-summary", { position: "static" });
   }
 
@@ -71,12 +76,13 @@ export default function Item({ item }: ItemProps) {
   }
 
   return (
-    <Box ref={target} className="item" sx={{ position: "relative" }} onClick={showOptions} onMouseLeave={()=>{
-      setTimeout(() => {
-        hideOptions()
-      }, 250);
-    }}>
+    <Box
+      ref={target}
+      className="item"
+      sx={{ position: "relative" }}
+    >
       <Card
+        onClick={showOptions}
         className="item-summary"
         shadow="sm"
         h={200}
@@ -151,9 +157,14 @@ export default function Item({ item }: ItemProps) {
           zIndex: 0,
         })}
       >
-        <Text fz={"xs"} fw={700} ta="right">
-          {item.title}
-        </Text>
+        <Group position="apart">
+          <Button onClick={hideOptions} size="sm" compact variant="outline">
+            ألغاء
+          </Button>
+          <Text fz={"xs"} fw={700} ta="right">
+            {item.title}
+          </Text>
+        </Group>
         <Checkbox.Group
           orientation="horizontal"
           sx={{ ".mantine-Group-root": { justifyContent: "flex-end" } }}
@@ -175,7 +186,7 @@ export default function Item({ item }: ItemProps) {
           <Stack
             px="sm"
             sx={(theme) => ({
-              width: 100,
+              width: 130,
               height: 85,
               alignItems: "flex-end",
               border: "1px solid",
@@ -210,7 +221,7 @@ export default function Item({ item }: ItemProps) {
                 <Radio
                   key={size.title}
                   value={size.title}
-                  label={size.title}
+                  label={size.title + ` (${formatCurrency(size.price)})`}
                   labelPosition="left"
                   styles={{
                     body: {

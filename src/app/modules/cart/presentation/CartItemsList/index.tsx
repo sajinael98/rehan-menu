@@ -1,5 +1,7 @@
-import { Stack } from "@mantine/core";
+import { Button, Flex, Stack, Text, ThemeIcon } from "@mantine/core";
+import { IconMoodSad2 } from "@tabler/icons-react";
 import { motion } from "framer-motion";
+import Link from "next/link";
 import { Item } from "react-use-cart";
 import { CartItem } from "..";
 
@@ -21,7 +23,33 @@ const CartItemsList = ({ items }: CartItemsListProps) => {
       <CartItem key={item.id} item={item} />
     </motion.div>
   ));
-
+  if (!items.length) {
+    return (
+      <Flex
+        sx={(theme) => ({
+          background: "none",
+          width: "100%",
+          position: "absolute",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%,-50%)",
+          justifyContent: "center",
+          alignItems: "center",
+          flexDirection: "column",
+        })}
+      >
+        <ThemeIcon size={100} variant="outline" sx={{ border: "none" }}>
+          <IconMoodSad2 size="5rem" />
+        </ThemeIcon>
+        <Text ta="center" dir="rtl" w={300} fw={400} mb="md">
+          يبدو أنك لم تضف أي منتجات بعد. تصفح القائمة واختر ما يعجبك!
+        </Text>
+        <Button href="/" component={Link}>
+          العودة الى القائمة
+        </Button>
+      </Flex>
+    );
+  }
   return <Stack mt="md">{cartItems}</Stack>;
 };
 
