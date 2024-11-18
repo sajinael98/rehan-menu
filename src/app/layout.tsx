@@ -2,15 +2,14 @@
 
 import {
   MantineProvider,
-  MantineThemeOverride,
-  MediaQuery,
+  MantineThemeOverride
 } from "@mantine/core";
+import { useDisclosure } from "@mantine/hooks";
 import { Tajawal } from "next/font/google";
-import "./globals.css";
-import { CartProvider } from "react-use-cart";
-import { useDisclosure, useMediaQuery } from "@mantine/hooks";
 import { useEffect } from "react";
+import { CartProvider } from "react-use-cart";
 import Welcome from "./(menu)/components/Welcome";
+import "./globals.css";
 import { useIsMobile } from "./hooks/use-is-mobile";
 
 const inter = Tajawal({ subsets: ["latin"], weight: "400" });

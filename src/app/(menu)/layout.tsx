@@ -1,7 +1,7 @@
 "use client";
 
 import { AppShell, MediaQuery } from "@mantine/core";
-import { useDisclosure, useMediaQuery } from "@mantine/hooks";
+import { useDisclosure } from "@mantine/hooks";
 import { PropsWithChildren } from "react";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";

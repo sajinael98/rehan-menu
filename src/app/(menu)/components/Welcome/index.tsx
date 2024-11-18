@@ -1,11 +1,8 @@
 "use client";
-import { useIsMobile } from "@/app/hooks/use-is-mobile";
 import { Box, Card, MediaQuery, Stack, Text } from "@mantine/core";
 import { motion } from "framer-motion";
 
 export default function Welcome() {
-  const isMobile = useIsMobile();
-
   return (
     <Stack
       sx={{
@@ -16,6 +13,7 @@ export default function Welcome() {
         backgroundSize: "cover",
         backgroundPosition: "calc(100% + 80px)",
         position: "relative",
+        overflow: "hidden"
       }}
     >
       <Box
@@ -52,8 +50,8 @@ export default function Welcome() {
             height={170}
           />
           <Card
-            initial={{ translateY: "100vh" }}
-            animate={{ translateY: 0 }}
+            initial={{ translateY: "100vh"}}
+            animate={{ translateY: 0}}
             transition={{
               delay: 2,
               duration: .5

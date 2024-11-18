@@ -1,3 +1,4 @@
+import { formatCurrency } from "@/app/utils";
 import {
   ActionIcon,
   Box,
@@ -9,7 +10,7 @@ import {
   Stack,
   Text,
   Textarea,
-  ThemeIcon,
+  ThemeIcon
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { useCounter } from "@mantine/hooks";
@@ -18,7 +19,6 @@ import { useAnimate } from "framer-motion/mini";
 import Image from "next/image";
 import { useCart } from "react-use-cart";
 import { IItem } from "../../types";
-import { formatCurrency } from "@/app/utils";
 
 interface ItemProps {
   item: IItem;
@@ -52,12 +52,12 @@ export default function Item({ item }: ItemProps) {
 
   async function showOptions() {
     animate(".item-summary", { position: "absolute", zIndex: 0, opacity: 0 });
-    animate(".item-options", { opacity: 1, zIndex: 1 }, { duration: 0.5 });
+    animate(".item-options", { opacity: 1, zIndex: 1 }, { duration: .5 });
     animate(".item-options", { position: "static" });
   }
   async function hideOptions() {
     animate(".item-options", { position: "absolute", zIndex: -1, opacity: 0 });
-    animate(".item-summary", { opacity: 1, zIndex: 1 }, { duration: 0.5 });
+    animate(".item-summary", { opacity: 1, zIndex: 1 });
     animate(".item-summary", { position: "static" });
   }
 
@@ -71,10 +71,13 @@ export default function Item({ item }: ItemProps) {
   }
 
   return (
-    <Box ref={target} className="item" sx={{ position: "relative" }}>
+    <Box ref={target} className="item" sx={{ position: "relative" }} onClick={showOptions} onMouseLeave={()=>{
+      setTimeout(() => {
+        hideOptions()
+      }, 250);
+    }}>
       <Card
         className="item-summary"
-        onClick={showOptions}
         shadow="sm"
         h={200}
         sx={(theme) => ({
@@ -113,7 +116,7 @@ export default function Item({ item }: ItemProps) {
               span
             >
               {formatCurrency(
-                item.sizes.find((size) => !!size.default)?.price as number,
+                item.sizes.find((size) => !!size.default)?.price as number
               )}
             </Text>
             <Text
@@ -131,7 +134,6 @@ export default function Item({ item }: ItemProps) {
         component="form"
         onSubmit={onSubmit(submitHandler)}
         className="item-options"
-        ref={target}
         shadow="sm"
         mih={200}
         sx={(theme) => ({
@@ -149,10 +151,13 @@ export default function Item({ item }: ItemProps) {
           zIndex: 0,
         })}
       >
+        <Text fz={"xs"} fw={700} ta="right">
+          {item.title}
+        </Text>
         <Checkbox.Group
           orientation="horizontal"
           sx={{ ".mantine-Group-root": { justifyContent: "flex-end" } }}
-          labelProps={{display:"none"}}
+          labelProps={{ display: "none" }}
           {...getInputProps("modifiers")}
         >
           {item.modifiers.map((modifier) => (
@@ -197,8 +202,8 @@ export default function Item({ item }: ItemProps) {
                   position: "absolute",
                   top: -10,
                   right: 0,
-                  fontWeight: 300
-                }
+                  fontWeight: 300,
+                },
               }}
             >
               {item.sizes.map((size) => (
@@ -217,7 +222,6 @@ export default function Item({ item }: ItemProps) {
             </Radio.Group>
           </Stack>
           <Textarea
-
             {...getInputProps("description")}
             sx={{ flex: 2 }}
             placeholder="ملاحظات أضافية على الطلب"
@@ -231,12 +235,12 @@ export default function Item({ item }: ItemProps) {
                 borderTop: "none",
                 borderColor: theme.colors.green,
                 borderRadius: theme.spacing.xs,
-                textAlign:"right",
+                textAlign: "right",
                 // fontSize: 16
                 "::placeholder": {
-                  textAlign:"right",
-                  fontSize: 12
-                }
+                  textAlign: "right",
+                  fontSize: 12,
+                },
               },
             })}
           />
